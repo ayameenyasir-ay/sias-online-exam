@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اختبار الندوة | Seminar Quiz</title>
+<style>
+:root{--bg:#f6f3ec;--card:#fff;--ink:#1f2a2e;--mut:#667;--pri:#0f766e;--pri2:#e6f4f1;--ok:#15803d;--bad:#b91c1c;--bd:#ddd6c8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12191b;--card:#1b2528;--ink:#ffffff;--mut:#9ab;--pri:#14b8a6;--pri2:#173532;--ok:#4ade80;--bad:#f87171;--bd:#2c3a3e}}
+:root[data-theme="dark"]{--bg:#12191b;--card:#1b2528;--ink:#ffffff;--mut:#9ab;--pri:#14b8a6;--pri2:#173532;--ok:#4ade80;--bad:#f87171;--bd:#2c3a3e}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Tahoma,"Noto Naskh Arabic",Arial,sans-serif;line-height:1.6}
+.w{max-width:560px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;margin-bottom:14px}
+h1{font-size:24px;margin:4px 0}h2{font-size:19px;margin:0 0 8px}
+.en{direction:ltr;text-align:left;color:var(--mut);font-size:14px;font-family:system-ui,Arial,sans-serif}
+label{display:block;font-weight:600;margin:12px 0 4px}
+input,select{width:100%;padding:12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:16px}
+button{width:100%;padding:13px;border:0;border-radius:12px;background:var(--pri);color:#fff;font:inherit;font-weight:700;font-size:16px;margin-top:16px;cursor:pointer}
+.opt,.opt.sel{color:var(--ink)}
+button.alt{background:var(--pri2);color:var(--pri)}
+.opt{display:block;width:100%;text-align:start;margin:8px 0 0;background:var(--bg);color:var(--ink);border:2px solid var(--bd);font-weight:500}
+.opt.sel{border-color:var(--pri);background:var(--pri2)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5;display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.tm{font-size:22px;font-variant-numeric:tabular-nums;color:var(--pri);direction:ltr}.tm.low{color:var(--bad)}
+.bar{height:6px;background:var(--bd);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--pri);width:0}
+.big{font-size:44px;font-weight:800;color:var(--pri);text-align:center}
+.row{display:flex;justify-content:space-around;text-align:center}
+.wr{border-inline-start:4px solid var(--bad);padding-inline-start:10px;margin:12px 0}
+.g{color:var(--ok);font-weight:700}.r{color:var(--bad)}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:7px 4px;border-bottom:1px solid var(--bd);text-align:start}
+tr.me{background:var(--pri2);font-weight:700}
+.scroll{overflow-x:auto}.hide{display:none}.cr{font-size:13px;text-align:center;color:var(--mut)}
+</style>
+</head>
+<body><div class="w">
+
+<div id="s1" class="card">
+  <h1>اختبار الندوة 📖</h1><div class="en">Seminar Quiz</div>
+  <p>١٥ سؤالاً · ٥ دقائق فقط<br><span class="en">15 questions · 5 minutes only</span></p>
+  <label>الاسم <span class="en">Name</span></label><input id="nm" autocomplete="name">
+  <label>رقم التسجيل <span class="en">Roll number</span></label><input id="rl">
+  <label>القسم <span class="en">Department</span></label><select id="dp"></select>
+  <button id="st">ابدأ الاختبار · Start Test</button>
+  <div id="er" class="r" style="margin-top:8px"></div>
+</div>
+
+<div id="s2" class="hide">
+  <div class="top"><span id="pg"></span><span class="tm" id="tm">05:00</span></div>
+  <div class="bar"><i id="pb"></i></div>
+  <div class="card" style="margin-top:12px"><h2 id="qt"></h2><button class="alt" id="tr" style="margin:0 0 6px;padding:8px;font-size:14px">🌐 Show English translation</button><div id="en" class="en hide" style="background:var(--pri2);color:var(--ink);padding:10px;border-radius:10px"></div><div id="op"></div>
+    <div class="row" style="gap:10px"><button class="alt" id="pv">السابق</button><button id="nx">التالي</button></div>
+  </div>
+</div>
+
+<div id="s3" class="hide">
+  <div class="card"><div class="big" id="sc"></div><div class="row"><div><b id="pc"></b><br>النسبة · Percentage</div><div><b id="tk"></b><br>الوقت · Time</div></div></div>
+  <div class="card"><div id="mg"></div><div class="row" id="rk" style="margin-top:14px"></div></div>
+  <div class="card"><h2>🏆 لوحة المتصدرين <span class="en" style="display:inline">Leaderboard</span></h2><div class="scroll"><table id="lb"></table></div><h2 style="margin-top:18px">ترتيب قسمك <span class="en" style="display:inline">Your Department</span></h2><div class="scroll"><table id="ld"></table></div><div id="ln" class="cr"></div></div>
+  <div class="card"><h2>مراجعة الإجابات <span class="en" style="display:inline">Review</span></h2><div id="rv"></div></div>
+  <button id="th">التالي · Next</button>
+</div>
+
+<div id="s4" class="hide">
+  <div class="card" style="text-align:center">
+    <div style="font-size:48px">🌿</div>
+    <h1>شكراً لكم على مشاركتكم</h1><div class="en">Thank you for participating!</div>
+    <p>جزاكم الله خيراً · May you be rewarded</p>
+  </div>
+  <div class="card"><h2>فريق الندوة <span class="en" style="display:inline">Seminar Team</span></h2>
+    <div id="tmz"></div></div>
+  <div class="cr" id="cr"></div>
+</div>
+
+</div>
+<script>
+// ====== EDIT THIS SECTION ======
+const DEPTS=["COMPUTER SCIENCE","PHYSICS","FOOD TECHNOLOGY","BCA"];
+// q = question, o = 4 options, a = index of correct option (0-3)
+const Q=[
+{q:"راوي الحديث الأول والثاني هو:",o:["المقدام","أبو هريرة","الزبير بن العوام","أنس"],a:1,e:{q:"The narrator of the first and second Hadith is:",o:["Al-Miqdam","Abu Hurairah","Az-Zubair ibn Al-Awwam","Anas"]}},
+{q:"إذا مات الإنسان انقطع عمله إلا من:",o:["اثنتين","أربع","ثلاث","خمس"],a:2,e:{q:"When a person dies, his deeds end except from:",o:["Two","Four","Three","Five"]}},
+{q:"أيٌّ مما يلي ليس من الأعمال التي لا تنقطع بعد الموت؟",o:["صدقة جارية","علم ينتفع به","ولد صالح يدعو له","مال موروث"],a:3,e:{q:"Which of the following is NOT among the deeds that continue after death?",o:["Ongoing charity","Beneficial knowledge","A righteous child who prays for him","Inherited wealth"]}},
+{q:"معنى «صدقة جارية»:",o:["مال يُنفق مرة واحدة","كل عمل صالح ينفع الناس في حياة صاحبه وبعد موته","دعاء الأبناء","الصدقة في رمضان"],a:1,e:{q:"The meaning of \"Sadaqah Jariyah\":",o:["Money spent one time","Any good deed that benefits people during the doer's life and after his death","The children's supplication","Charity in Ramadan"]}},
+{q:"معنى «نَفَّس» هو:",o:["فرَّج","منع","أخفى","سهَّل"],a:0,e:{q:"The meaning of \"Naffasa\" is:",o:["Relieved","Prevented","Hid","Made easy"]}},
+{q:"مرادف «كُرْبة» هو:",o:["عون","صعب","حُزن","سهل"],a:2,e:{q:"A synonym of \"Kurbah\" is:",o:["Help","Difficult","Grief / distress","Easy"]}},
+{q:"معنى «عُسْر» هو:",o:["سهل","صعب","فرج","عون"],a:1,e:{q:"The meaning of \"Usr\" is:",o:["Easy","Difficult","Relief","Help"]}},
+{q:"«مَن ستر مسلمًا» جزاؤه:",o:["ستره الله في الدنيا والآخرة","نفَّس الله عنه كربة","يسَّر الله عليه","أعطاه مالًا"],a:0,e:{q:"\"Whoever conceals (the faults of) a Muslim\" – his reward:",o:["Allah will conceal him in this world and the Hereafter","Allah will relieve him of a distress","Allah will make things easy for him","Allah will give him wealth"]}},
+{q:"«وَاللهُ في عَوْنِ العبدِ ما كان العبدُ في ...... أخيه»:",o:["ستر","عون","مال","علم"],a:1,e:{q:"\"Allah helps His servant as long as the servant is helping his brother\" – fill in the blank:",o:["Concealing","Helping","Wealth","Knowledge"]}},
+{q:"مَن سلك طريقًا يلتمس فيه علمًا سهَّل الله له به:",o:["رزقًا واسعًا","طريقًا إلى الجنة","ولدًا صالحًا","صدقة جارية"],a:1,e:{q:"Whoever travels a path seeking knowledge, Allah makes easy for him by it:",o:["Abundant provision","A path to Paradise","A righteous child","Ongoing charity"]}},
+{q:"راوي الحديث «ما أكل أحد طعامًا قط خيرًا من أن يأكل من عمل يده» هو:",o:["أبو هريرة","الزبير بن العوام","المقدام","عمر"],a:2,e:{q:"The narrator of the Hadith \"No one has ever eaten better food than that earned by his own hand\" is:",o:["Abu Hurairah","Az-Zubair ibn Al-Awwam","Al-Miqdam","Umar"]}},
+{q:"أي نبي كان يأكل من عمل يده؟",o:["موسى عليه السلام","داود عليه السلام","إبراهيم عليه السلام","نوح عليه السلام"],a:1,e:{q:"Which prophet used to eat from the work of his own hand?",o:["Musa (Moses)","Dawud (David)","Ibrahim (Abraham)","Nuh (Noah)"]}},
+{q:"معنى «حُزْمَة الحَطَب»:",o:["ما جُمع وربط من الحطب","نوع من الطعام","سوق للحطب","حبل قديم"],a:0,e:{q:"The meaning of \"Huzmat al-Hatab\":",o:["A bundle of firewood gathered and tied","A type of food","A firewood market","An old rope"]}},
+{q:"معنى «يَكُفُّ» هو:",o:["يطلب","يدخل","يمنع","يسهِّل"],a:2,e:{q:"The meaning of \"Yakuff\" is:",o:["Asks","Enters","Restrains / prevents","Makes easy"]}},
+{q:"يرشدنا الحديث الرابع إلى أن بيع حزمة الحطب خير من:",o:["أن يعمل الإنسان","أن يسأل الناس أعطوه أو منعوه","أن يتعلم","أن يتصدق"],a:1,e:{q:"The fourth Hadith guides us that selling a bundle of firewood is better than:",o:["A person working","Asking people, whether they give him or refuse him","Learning","Giving charity"]}}
+];
+const TEAM=[["SELVA P","COMPUTER SCIENCE"],["HUDA KADEEJA","COMPUTER SCIENCE"],["LAMHA FATHIMA","COMPUTER SCIENCE"],["NAJA","COMPUTER SCIENCE"],["SHEZVA","COMPUTER SCIENCE"]];
+const CREDIT={name:"Ameen",role:"Technical side · الجانب التقني",insta:"https://www.instagram.com/ameen_221b",handle:"@ameen_221b"};
+const TIME=300;
+// ===============================
+const $=id=>document.getElementById(id),show=n=>{for(let i=1;i<=4;i++)$("s"+i).classList.toggle("hide",i!==n);scrollTo(0,0)};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const N=n=>n.toLocaleString("ar-EG");
+$("dp").innerHTML=DEPTS.map(d=>`<option>${esc(d)}</option>`).join("");
+$("tmz").innerHTML=TEAM.map(t=>`<div style="padding:8px 0;border-bottom:1px solid var(--bd)"><b>${esc(t[0])}</b><div class="en">${esc(t[1])}</div></div>`).join("");
+$("cr").innerHTML=`${esc(CREDIT.role)}<br>Made by <b>${esc(CREDIT.name)}</b> 😄 · <a href="${esc(CREDIT.insta)}" target="_blank" rel="noopener" style="color:var(--pri)">📸 ${esc(CREDIT.handle)}</a>`;
+let me={},ans=[],cur=0,left=TIME,iv=null,done=false,shown=[];
+
+$("st").onclick=()=>{
+  const nm=$("nm").value.trim(),rl=$("rl").value.trim();
+  if(!nm||!rl){$("er").textContent="الرجاء إدخال الاسم والرقم · Please enter name and roll number";return}
+  me={name:nm,roll:rl,dept:$("dp").value};ans=Array(Q.length).fill(-1);shown=[];cur=0;left=TIME;done=false;
+  show(2);draw();tick();iv=setInterval(tick,1000);
+};
+function tick(){
+  const m=Math.floor(left/60),s=left%60;
+  $("tm").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  $("tm").classList.toggle("low",left<=60);
+  if(left<=0){finish();return}left--;
+}
+function draw(){
+  const q=Q[cur];
+  $("pg").textContent="السؤال "+N(cur+1)+" من "+N(Q.length);
+  $("pb").style.width=((cur+1)/Q.length*100)+"%";
+  $("qt").textContent=q.q;
+  $("en").classList.toggle("hide",!shown[cur]);
+  $("tr").textContent=shown[cur]?"Hide English translation":"🌐 Show English translation";
+  $("en").innerHTML="<b>"+esc(q.e.q)+"</b><br>"+q.e.o.map((o,i)=>""+"ABCD"[i]+") "+esc(o)).join("<br>");
+  $("op").innerHTML=q.o.map((o,i)=>`<button class="opt ${ans[cur]===i?"sel":""}" data-i="${i}">${esc(o)}</button>`).join("");
+  $("op").querySelectorAll(".opt").forEach(b=>b.onclick=()=>{ans[cur]=+b.dataset.i;draw()});
+  $("pv").style.visibility=cur?"visible":"hidden";
+  $("nx").textContent=cur===Q.length-1?"إنهاء · Finish":"التالي";
+}
+$("pv").onclick=()=>{if(cur>0){cur--;draw()}};
+$("tr").onclick=()=>{shown[cur]=!shown[cur];draw()};
+$("nx").onclick=()=>{if(cur<Q.length-1){cur++;draw()}else finish()};
+
+async function finish(){
+  if(done)return;done=true;clearInterval(iv);
+  const used=TIME-Math.max(left,0),score=ans.filter((a,i)=>a===Q[i].a).length,pct=Math.round(score/Q.length*100);
+  $("sc").textContent=N(score)+" / "+N(Q.length);$("pc").textContent=N(pct)+"٪";
+  $("tk").textContent=Math.floor(used/60)+":"+String(used%60).padStart(2,"0");
+  const M=pct>=90?["🌟 ما شاء الله، مبارك! أداء ممتاز، حافظ على هذا الزخم وواصل التفوق.","Congratulations! Outstanding result — keep the momentum going."]:pct>=75?["👏 أحسنت! نتيجة رائعة، استمر وستصل إلى القمة بإذن الله.","Well done! Great result — keep pushing and you'll reach the top."]:pct>=50?["👍 جيد، ويمكنك أن تكون أفضل. ركّز على دراستك وراجع الدرس مرة أخرى.","Good effort — you can do even better. Focus on your studies and revise the chapter."]:["💪 لا تيأس! ركّز على دراستك وراجع الوحدة، وستتحسن نتيجتك المرة القادمة.","Don't give up! Focus on your studies, revise the unit, and you'll improve next time."];
+  $("mg").innerHTML=`<h2>${M[0]}</h2><div class="en">${M[1]}</div>`;
+  setRk("—","—","","");
+  const wr=Q.map((q,i)=>({q,i})).filter(x=>ans[x.i]!==x.q.a);
+  $("rv").innerHTML=wr.length?wr.map(x=>`<div class="wr"><b>${N(x.i+1)}. ${esc(x.q.q)}</b><br><span class="r">✗ إجابتك · Yours: ${ans[x.i]<0?"لم تجب · none":esc(x.q.o[ans[x.i]])}</span><br><span class="g">✓ الصحيحة · Correct: ${esc(x.q.o[x.q.a])}</span></div>`).join(""):'<p class="g">🎉 ممتاز! كل الإجابات صحيحة · Perfect score!</p>';
+  show(3);
+  const rec={name:me.name,roll:me.roll,dept:me.dept,score,pct,time:used,ts:Date.now()};
+  renderLB([rec],true,rec);
+  try{
+    const db=await claude.use("db");
+    if(db){
+      await db.collection("scores").add(rec);
+      const snap=await db.collection("scores").orderBy("score","desc").limit(200).get();
+      let rows=snap.docs.map(d=>d.data());
+      rows.sort((a,b)=>b.score-a.score||a.time-b.time);
+      let ix=rows.findIndex(r=>r.ts===rec.ts&&r.roll===rec.roll);if(ix<0){rows.push(rec);rows.sort((a,b)=>b.score-a.score||a.time-b.time);ix=rows.findIndex(r=>r.ts===rec.ts&&r.roll===rec.roll)}
+      const dr=rows.filter(r=>r.dept===rec.dept),di=dr.findIndex(r=>r.ts===rec.ts&&r.roll===rec.roll);
+      setRk(N(ix+1),N(di+1),"من "+N(rows.length)+" · of "+rows.length,"من "+N(dr.length)+" · of "+dr.length);
+      renderLB(rows.slice(0,15),false,rec);renderLB(dr.slice(0,10),false,rec,"ld");return;
+    }
+  }catch(e){console.log(e)}
+  $("ln").textContent="لوحة المتصدرين المشتركة غير متاحة الآن · Shared leaderboard unavailable";
+}
+function setRk(o,d,n,m){$("rk").innerHTML=`<div><b style="font-size:26px;color:var(--pri)">${o}</b><br>الترتيب العام · Overall rank<br><small>${n}</small></div><div><b style="font-size:26px;color:var(--pri)">${d}</b><br>ترتيب القسم · Department rank<br><small>${m}</small></div>`}
+function renderLB(rows,local,rec,tb){
+  $(tb||"lb").innerHTML="<tr><th>#</th><th>الاسم</th><th>القسم</th><th>الدرجة</th></tr>"+rows.map((r,i)=>`<tr class="${r.roll===rec.roll&&r.ts===rec.ts?"me":""}"><td>${N(i+1)}</td><td>${esc(r.name)}</td><td>${esc(String(r.dept).split("|")[0])}</td><td>${N(r.score)} (${N(r.pct)}٪)</td></tr>`).join("");
+  if(!local)$("ln").textContent="";
+}
+$("th").onclick=()=>show(4);
+</script>
+</body>
+</html>
